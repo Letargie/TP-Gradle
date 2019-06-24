@@ -4,6 +4,12 @@
     <bytecodeTargetLevel>
       <module name="cesi.tp_gradle_main" target="1.8" />
       <module name="cesi.tp_gradle_test" target="1.8" />
+      <module name="controller_main" target="1.8" />
+      <module name="controller_test" target="1.8" />
+      <module name="model_main" target="1.8" />
+      <module name="model_test" target="1.8" />
+      <module name="view_main" target="1.8" />
+      <module name="view_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

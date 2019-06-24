@@ -1,2 +1,5 @@
 rootProject.name = 'cesi.tp_gradle'
+include 'model'
+include 'view'
+include 'controller'
 

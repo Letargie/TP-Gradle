@@ -6,6 +6,15 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cesi.tp_gradle.iml" filepath="$PROJECT_DIR$/.idea/modules/cesi.tp_gradle.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cesi.tp_gradle_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cesi.tp_gradle_main.iml" group="cesi.tp_gradle" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cesi.tp_gradle_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cesi.tp_gradle_test.iml" group="cesi.tp_gradle" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller.iml" filepath="$PROJECT_DIR$/.idea/modules/controller.iml" group="controller" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller/controller_main.iml" filepath="$PROJECT_DIR$/.idea/modules/controller/controller_main.iml" group="controller" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller/controller_test.iml" filepath="$PROJECT_DIR$/.idea/modules/controller/controller_test.iml" group="controller" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model.iml" filepath="$PROJECT_DIR$/.idea/modules/model.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model/model_main.iml" filepath="$PROJECT_DIR$/.idea/modules/model/model_main.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model/model_test.iml" filepath="$PROJECT_DIR$/.idea/modules/model/model_test.iml" group="model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/view.iml" filepath="$PROJECT_DIR$/.idea/modules/view.iml" group="view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/view/view_main.iml" filepath="$PROJECT_DIR$/.idea/modules/view/view_main.iml" group="view" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/view/view_test.iml" filepath="$PROJECT_DIR$/.idea/modules/view/view_test.iml" group="view" />
     </modules>
   </component>
 </project>
