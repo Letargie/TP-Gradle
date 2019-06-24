@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'cesi.tp_gradle'
+version '0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.testng:testng:6+'
+}

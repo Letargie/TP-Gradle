@@ -8,6 +8,8 @@
       <module name="controller_test" target="1.8" />
       <module name="model_main" target="1.8" />
       <module name="model_test" target="1.8" />
+      <module name="spring_gradle_main" target="1.8" />
+      <module name="spring_gradle_test" target="1.8" />
       <module name="view_main" target="1.8" />
       <module name="view_test" target="1.8" />
     </bytecodeTargetLevel>
