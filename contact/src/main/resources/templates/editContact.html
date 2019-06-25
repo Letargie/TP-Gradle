@@ -1,0 +1,22 @@
+<html>
+<body>
+<form action="#" th:action="@{/contacts/edit}" th:object="${contact}" method="post">
+    <table>
+        <input type="hidden" th:field="*{id}" />
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" th:field="*{firstName}" /></td>
+            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</td>
+        </tr>
+        <tr>
+            <td>Last name:</td>
+            <td><input type="text" th:field="*{lastName}" /></td>
+            <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

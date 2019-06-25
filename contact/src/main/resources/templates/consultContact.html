@@ -1,0 +1,15 @@
+<html>
+<body>
+<a th:href="${'/contacts/edit/'+ contact.id}">Edit</a>
+<table>
+    <tr>
+        <td>First name:</td>
+        <td><span th:text="*{contact.firstName}"></span></td>
+    </tr>
+    <tr>
+        <td>Last name:</td>
+        <td><span th:text="*{contact.lastName}"></span></td>
+    </tr>
+</table>
+</body>
+</html>
