@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{base.html}">
+
+<th:block layout:fragment="breadcrumb">
+    <li class="breadcrumb-item">Addresses</li>
+    <li class="breadcrumb-item">List</li>
+</th:block>
+<div layout:fragment="page_content" id="page_content">
+
+    <a class="btn btn-primary" href="/addresses/edit">Add</a>
+    <table>
+        <tr><td>Postal Code</td><td>Address</td><td>Apartment</td><td>Options</td></tr>
+        <tr th:each="e : ${addresses}">
+            <td><span th:text="${e.postalCode}"></span></td><td><span th:text="${e.address}"></span></td><td><span th:text="${e.apartment}"></span></td><td><a class="btn btn-secondary" th:href="${'/addresses/' + e.id}">Consult</a><a class="btn btn-secondary" th:href="${'/addresses/edit/' + e.id}">Edit</a><form style="display: inline-block" th:action="${'/addresses/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
+        </tr>
+    </table>
+</div>
+</html>

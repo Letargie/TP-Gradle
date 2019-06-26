@@ -30,5 +30,8 @@
             <td  th:text="${e.email}"></td><td><form style="display: inline-block" th:action="${'/emails/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
         </tr>
     </table>
+    <ul>
+        <li th:each="e : ${contact.addresses}" th:text="${e.postalCode + ' - ' + e.address + ' - ' + e.apartment}"></li>
+    </ul>
 </div>
 </html>

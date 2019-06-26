@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{base.html}">
+
+<th:block layout:fragment="breadcrumb">
+    <li class="breadcrumb-item">Address</li>
+    <li class="breadcrumb-item">Consult</li>
+</th:block>
+<div layout:fragment="page_content" id="page_content">
+    <a class="btn btn-primary" th:href="${'/addresses/edit/'+ address.id}">Edit</a>
+    <table>
+        <tr>
+            <td>Postal code:</td>
+            <td><span th:text="*{address.postalCode}"></span></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><span th:text="*{address.address}"></span></td>
+        </tr>
+        <tr>
+            <td>Apartment:</td>
+            <td><span th:text="*{address.apartment}"></span></td>
+        </tr>
+    </table>
+    <ul>
+        <li th:each="e : ${address.contacts}" th:text="${e.lastName + ' ' + e.firstName}"></li>
+    </ul>
+</div>
+</html>

@@ -1,9 +1,6 @@
 package contact.controller;
 
-import contact.model.Contact;
-import contact.model.ContactNotFoundException;
-import contact.model.ContactRepository;
-import contact.model.EmailRepository;
+import contact.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,7 +17,7 @@ public class ContactController {
     @Autowired
     private ContactRepository contactRepository;
     @Autowired
-    private EmailRepository emailRepo;
+    private AddressRepository addressRepository;
 
     @ModelAttribute("contacts")
     @GetMapping(value ="/contacts", produces = { MediaType.APPLICATION_XML_VALUE })
@@ -30,6 +28,7 @@ public class ContactController {
     @GetMapping("/contacts/{id}")
     String consult(@PathVariable Long id, Model model){
         model.addAttribute("contact", this.one(id));
+        model.addAttribute("addresses", addressRepository.findAll());
         return "consultContact";
     }
 
@@ -45,9 +44,10 @@ public class ContactController {
     }
 
     @PostMapping("/contacts/edit")
-    String edit(Contact newContact, Model model) {
+    String edit(Contact newContact, Model model, @RequestParam(value = "addressesIds", required = false) List<Long> addressesIds) {
         this.apiEdit(newContact);
         model.addAttribute("contact", newContact);
+        model.addAttribute("addresses", addressRepository.findAll());
         return "redirect:/contacts/"+newContact.getId();
     }
 
@@ -59,6 +59,7 @@ public class ContactController {
     @GetMapping("/contacts/edit/{id}")
     String showEdit(@PathVariable Long id, Model model){
         model.addAttribute("contact", this.one(id));
+        model.addAttribute("addresses", addressRepository.findAll());
         return "editContact";
     }
 
@@ -70,6 +71,16 @@ public class ContactController {
 
     @DeleteMapping(value="/api/contacts/{id}", produces = { MediaType.APPLICATION_XML_VALUE })
     void apiDelete(@PathVariable Long id) {
+        Contact c = this.one(id);
+        List<Address> addresses = c.getAddresses();
+        for(Address a : addresses){
+            List<Contact> contacts = a.getContacts();
+            contacts.remove(c);
+            a.setContacts(contacts);
+        }
+        addressRepository.saveAll(addresses);
+        c.setAddresses(new ArrayList<>());
+        contactRepository.save(c);
         contactRepository.deleteById(id);
     }
 }

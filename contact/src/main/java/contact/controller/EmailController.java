@@ -31,8 +31,6 @@ public class EmailController {
 
     @PostMapping("/emails/delete/{id}")
     RedirectView delete(@PathVariable Long id){
-        Email email = this.one(id);
-        emailRepository.save(email);
         this.apiDelete(id);
         return new RedirectView("/emails");
     }

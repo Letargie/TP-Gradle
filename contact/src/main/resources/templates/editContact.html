@@ -25,6 +25,13 @@
                 <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</td>
             </tr>
             <tr>
+                <td>Addresses:</td>
+                <td><select name="addressesIds" multiple>
+                    <option th:each="e : ${addresses}" th:value="${e.id}" th:text="${e.postalCode + ' - ' + e.address + ' - ' + e.apartment}" th:if="${contact.addresses.contains(e)}" selected></option>
+                    <option th:each="e : ${addresses}" th:value="${e.id}" th:text="${e.postalCode + ' - ' + e.address + ' - ' + e.apartment}" th:if="${!contact.addresses.contains(e)}"></option>
+                </select></td>
+            </tr>
+            <tr>
                 <td><button type="submit">Submit</button></td>
             </tr>
         </table>
