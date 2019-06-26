@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Hello World!</title>
-</head>
-<body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 
-<a href="/contacts/edit">Add</a>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorate="~{base.html}">
 
-<table>
-    <tr><td>First Name</td><td>Last Name</td><td>Options</td></tr>
-    <tr th:each="e : ${contacts}">
-        <td><a th:href="${'/contacts/' + e.id}"><span th:text="${e.lastName}"></span></a></td><td th:text="${e.firstName}"/><td><a th:href="${'/contacts/edit/' + e.id}">Edit</a> | <form th:action="${'/contacts/delete/' + e.id}" method="POST"><button type="submit">Delete</button></form></td>
-    </tr>
-</table>
+<th:block layout:fragment="breadcrumb">
+    <li class="breadcrumb-item">Contacts</li>
+    <li class="breadcrumb-item">List</li>
+</th:block>
+<div layout:fragment="page_content" id="page_content">
 
-</body>
+    <a class="btn btn-primary" href="/contacts/edit">Add</a>
+
+    <table>
+        <tr><td>First Name</td><td>Last Name</td><td>Options</td></tr>
+        <tr th:each="e : ${contacts}">
+            <td><a th:href="${'/contacts/' + e.id}"><span th:text="${e.lastName}"></span></a></td><td th:text="${e.firstName}"/><td><a class="btn btn-secondary" th:href="${'/contacts/edit/' + e.id}">Edit</a><form style="display: inline-block" th:action="${'/contacts/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
+        </tr>
+    </table>
+</div>
 </html>

@@ -13,10 +13,10 @@ public class Contact {
     private String lastName;
 
     @OneToMany(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL)
+            cascade =  CascadeType.ALL, mappedBy = "contact", orphanRemoval = true)
     private List<Email> emails;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "contacts")
     private List<Address> addresses;
 
     protected Contact() {}
@@ -24,6 +24,10 @@ public class Contact {
     public Contact(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public List<Email> getEmails() {
+        return emails;
     }
 
     public void setFirstName(String firstName) {

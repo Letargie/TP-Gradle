@@ -17,6 +17,7 @@ public class Address {
     private String apartment;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="CONTACTS")
     private List<Contact> contacts;
 
     protected Address() {}

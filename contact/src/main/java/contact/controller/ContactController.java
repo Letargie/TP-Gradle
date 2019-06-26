@@ -3,6 +3,8 @@ package contact.controller;
 import contact.model.Contact;
 import contact.model.ContactNotFoundException;
 import contact.model.ContactRepository;
+import contact.model.EmailRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +16,15 @@ import java.util.List;
 @Controller
 public class ContactController {
 
-    private final ContactRepository repository;
-
-    ContactController(ContactRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private ContactRepository contactRepository;
+    @Autowired
+    private EmailRepository emailRepo;
 
     @ModelAttribute("contacts")
     @GetMapping(value ="/contacts", produces = { MediaType.APPLICATION_XML_VALUE })
     List<Contact> all() {
-        return repository.findAll();
+        return contactRepository.findAll();
     }
 
     @GetMapping("/contacts/{id}")
@@ -34,7 +35,7 @@ public class ContactController {
 
     @GetMapping(value ="/api/contacts/{id}", produces = { MediaType.APPLICATION_XML_VALUE })
     Contact one(@PathVariable Long id) {
-        return repository.findById(id)
+        return contactRepository.findById(id)
                 .orElseThrow(() -> new ContactNotFoundException(id));
     }
 
@@ -52,7 +53,7 @@ public class ContactController {
 
     @PostMapping(value = "/api/contacts/edit", produces = { MediaType.APPLICATION_XML_VALUE })
     Contact apiEdit(Contact newContact) {
-        return repository.save(newContact);
+        return contactRepository.save(newContact);
     }
 
     @GetMapping("/contacts/edit/{id}")
@@ -69,7 +70,7 @@ public class ContactController {
 
     @DeleteMapping(value="/api/contacts/{id}", produces = { MediaType.APPLICATION_XML_VALUE })
     void apiDelete(@PathVariable Long id) {
-        repository.deleteById(id);
+        contactRepository.deleteById(id);
     }
 }
 
