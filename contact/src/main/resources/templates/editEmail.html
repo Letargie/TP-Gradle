@@ -5,7 +5,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{base.html}">
-
+<head>
+    <title>Edit email</title>
+</head>
 <th:block layout:fragment="breadcrumb">
     <li class="breadcrumb-item">Email</li>
     <li class="breadcrumb-item">Edit</li>
@@ -13,7 +15,7 @@
 <div layout:fragment="page_content" id="page_content">
 
     <form action="#" th:action="@{/emails/edit}" th:object="${email}" method="post">
-        <table>
+        <table class="table">
             <input type="hidden" th:field="*{id}" />
             <tr>
                 <td>Email:</td>

@@ -46,6 +46,13 @@ public class EmailController {
         return "editEmail";
     }
 
+    @GetMapping("/emails/edit/{id}")
+    String showEdit(@PathVariable Long id, Model model){
+        model.addAttribute("email", this.one(id));
+        model.addAttribute("contacts", contactRepository.findAll());
+        return "editEmail";
+    }
+
     @PostMapping("/emails/edit")
     String edit(@RequestParam("id") Long id,
                 @RequestParam("email") String email,

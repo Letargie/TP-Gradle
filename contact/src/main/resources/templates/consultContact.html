@@ -5,16 +5,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{base.html}">
-
+<head>
+    <title>Contact</title>
+</head>
 <th:block layout:fragment="breadcrumb">
     <li class="breadcrumb-item">Contacts</li>
     <li class="breadcrumb-item">Consult</li>
 </th:block>
 <div layout:fragment="page_content" id="page_content">
 
-    <a class="btn btn-primary" th:href="${'/contacts/edit/'+ contact.id}">Edit</a>
-    <form style="display: inline-block" th:action="${'/contacts/delete/' + contact.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form>
-    <table>
+    <a class="btn btn-primary m-1" th:href="${'/contacts/edit/'+ contact.id}">Edit</a>
+    <form style="display: inline-block" th:action="${'/contacts/delete/' + contact.id}" method="POST"><button class="btn btn-warning m-1" type="submit">Delete</button></form>
+    <table class="table">
         <tr>
             <td>First name:</td>
             <td><span th:text="*{contact.firstName}"></span></td>
@@ -24,14 +26,24 @@
             <td><span th:text="*{contact.lastName}"></span></td>
         </tr>
     </table>
-    <table>
-        <tr><td>Email</td><td>Options</td></tr>
+    <table class="table">
+        <tr><th>Email</th><th>Options</th></tr>
         <tr th:each="e : ${contact.emails}">
-            <td  th:text="${e.email}"></td><td><form style="display: inline-block" th:action="${'/emails/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
+            <td  th:text="${e.email}"></td>
+            <td><form style="display: inline-block" th:action="${'/emails/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
         </tr>
     </table>
-    <ul>
-        <li th:each="e : ${contact.addresses}" th:text="${e.postalCode + ' - ' + e.address + ' - ' + e.apartment}"></li>
-    </ul>
+    <table class="table">
+        <tr>
+            <th>Postal code</th>
+            <th>address</th>
+            <th>Apartment</th>
+        </tr>
+        <tr th:each="e : ${contact.addresses}">
+            <td th:text="${e.postalCode}"></td>
+            <td th:text="${e.address}"></td>
+            <td th:text="${e.apartment}"></td>
+        </tr>
+    </table>
 </div>
 </html>

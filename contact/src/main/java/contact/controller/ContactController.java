@@ -25,6 +25,11 @@ public class ContactController {
         return contactRepository.findAll();
     }
 
+    @GetMapping(value ="/api/contacts", produces = { MediaType.APPLICATION_XML_VALUE })
+    List<Contact> apiContacts() {
+        return contactRepository.findAll();
+    }
+
     @GetMapping("/contacts/{id}")
     String consult(@PathVariable Long id, Model model){
         model.addAttribute("contact", this.one(id));
@@ -44,7 +49,22 @@ public class ContactController {
     }
 
     @PostMapping("/contacts/edit")
-    String edit(Contact newContact, Model model, @RequestParam(value = "addressesIds", required = false) List<Long> addressesIds) {
+    String edit(Contact newContact, Model model,
+                @RequestParam(value = "addressesIds", required = false) List<Long> addressesIds,
+                @RequestParam(value = "emailsIds", required = false) List<Long> emailsIds) {
+        if(addressesIds != null){
+            ArrayList<Address> addresses = new ArrayList<>();
+            for (Long addressId: addressesIds) {
+                Address a = addressRepository.findById(addressId).orElse(null);
+                if(a!= null){
+                    addresses.add(a);
+                    ArrayList<Contact> l = new ArrayList<>(a.getContacts());
+                    l.add(newContact);
+                    a.setContacts(l);
+                }
+            }
+            newContact.setAddresses(addresses);
+        }
         this.apiEdit(newContact);
         model.addAttribute("contact", newContact);
         model.addAttribute("addresses", addressRepository.findAll());

@@ -5,18 +5,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{base.html}">
-
+<head>
+    <title>Emails</title>
+</head>
 <th:block layout:fragment="breadcrumb">
     <li class="breadcrumb-item">Emails</li>
     <li class="breadcrumb-item">List</li>
 </th:block>
 <div layout:fragment="page_content" id="page_content">
 
-    <a class="btn btn-primary" href="/emails/edit">Add</a>
-    <table>
-        <tr><td>Email</td><td>Contact</td><td>Options</td></tr>
+    <a class="btn btn-primary m-1" href="/emails/edit">Add</a>
+    <table class="table">
+        <tr>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Options</th>
+        </tr>
         <tr th:each="e : ${emails}">
-            <td><span th:text="${e.email}"></span></td><td th:text="${e.contact.lastName + ' ' + e.contact.firstName}"/><td><form style="display: inline-block" th:action="${'/emails/delete/' + e.id}" method="POST"><button class="btn btn-warning" type="submit">Delete</button></form></td>
+            <td><span th:text="${e.email}"></span></td>
+            <td th:text="${e.contact.lastName + ' ' + e.contact.firstName}"></td>
+            <td><a class="btn btn-secondary ml-1 mr-1" th:href="${'/emails/edit/'+e.id}">Edit</a><form style="display: inline-block" th:action="${'/emails/delete/' + e.id}" method="POST"><button class="btn btn-warning ml-1 mr-1" type="submit">Delete</button></form></td>
         </tr>
     </table>
 </div>

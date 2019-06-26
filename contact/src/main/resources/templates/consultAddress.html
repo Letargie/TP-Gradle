@@ -5,14 +5,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{base.html}">
-
+<head>
+    <title>Address</title>
+</head>
 <th:block layout:fragment="breadcrumb">
     <li class="breadcrumb-item">Address</li>
     <li class="breadcrumb-item">Consult</li>
 </th:block>
 <div layout:fragment="page_content" id="page_content">
-    <a class="btn btn-primary" th:href="${'/addresses/edit/'+ address.id}">Edit</a>
-    <table>
+    <a class="btn btn-primary m-1" th:href="${'/addresses/edit/'+ address.id}">Edit</a>
+    <table class="table">
         <tr>
             <td>Postal code:</td>
             <td><span th:text="*{address.postalCode}"></span></td>
@@ -26,8 +28,16 @@
             <td><span th:text="*{address.apartment}"></span></td>
         </tr>
     </table>
-    <ul>
-        <li th:each="e : ${address.contacts}" th:text="${e.lastName + ' ' + e.firstName}"></li>
-    </ul>
+    <table class="table">
+        <tr>
+            <th>Last name</th>
+            <th>First name</th>
+            <th>Apartment</th>
+        </tr>
+        <tr th:each="e : ${address.contacts}">
+            <td th:text="${e.lastName}"></td>
+            <td th:text="${e.firstName}"></td>
+        </tr>
+    </table>
 </div>
 </html>

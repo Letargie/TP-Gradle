@@ -5,14 +5,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorate="~{base.html}">
-
+<head>
+    <title>Edit contact</title>
+</head>
 <th:block layout:fragment="breadcrumb">
     <li class="breadcrumb-item">Contacts</li>
     <li class="breadcrumb-item">Edit</li>
 </th:block>
 <div layout:fragment="page_content" id="page_content">
     <form action="#" th:action="@{/contacts/edit}" th:object="${contact}" method="post">
-        <table>
+        <table class="table">
             <input type="hidden" th:field="*{id}" />
             <tr>
                 <td>First name:</td>
@@ -23,6 +25,13 @@
                 <td>Last name:</td>
                 <td><input type="text" th:field="*{lastName}" /></td>
                 <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</td>
+            </tr>
+            <tr>
+                <td>Emails:</td>
+                <td><select name="emailsIds" multiple>
+                    <option th:each="e : ${emails}" th:value="${e.id}" th:text="${e.email}" th:if="${contact.emails.contains(e)}" selected></option>
+                    <option th:each="e : ${emails}" th:value="${e.id}" th:text="${e.postalCode}" th:if="${!contact.emails.contains(e)}"></option>
+                </select></td>
             </tr>
             <tr>
                 <td>Addresses:</td>
